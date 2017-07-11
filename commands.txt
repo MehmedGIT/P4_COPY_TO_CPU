@@ -1,0 +1,19 @@
+table_set_default copy_to_cpu _drop
+table_set_default ipv4_lpm _drop
+table_set_default forward _drop
+table_set_default send_frame _drop
+table_add ipv4_lpm set_nhop 10.0.0.1/32 => 10.0.0.1 1
+table_add ipv4_lpm set_nhop 10.0.0.2/32 => 10.0.0.2 2
+table_add ipv4_lpm set_nhop 10.0.0.3/32 => 10.0.0.3 3
+table_add ipv4_lpm set_nhop 10.0.0.4/32 => 10.0.0.4 4
+table_add forward set_dmac 10.0.0.1 => 00:00:00:00:00:01
+table_add forward set_dmac 10.0.0.2 => 00:00:00:00:00:02
+table_add forward set_dmac 10.0.0.3 => 00:00:00:00:00:03
+table_add forward set_dmac 10.0.0.4 => 00:00:00:00:00:04
+table_add send_frame rewrite_mac 1 => 00:00:00:00:00:01
+table_add send_frame rewrite_mac 2 => 00:00:00:00:00:02
+table_add send_frame rewrite_mac 3 => 00:00:00:00:00:03
+table_add send_frame rewrite_mac 4 => 00:00:00:00:00:04
+mirroring_add 250 0
+table_add copy_to_cpu do_copy_to_cpu 10.0.1.0 =>
+table_add copy_to_cpu do_copy_to_cpu 10.0.3.0 =>
