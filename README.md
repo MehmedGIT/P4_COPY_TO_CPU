@@ -42,7 +42,7 @@ If you want to change the `CPU port` edit the `mirroring_add` command in the [co
 - `sudo python receive.py veth0` - starts the `CPU port listener`(which is `port 0(veth0 or veth1)` in our case);
 - `sudo python send_one.py` - sends one packet on `port 4(veth8 or veth9)`; 
 
-Every time you send a packet, it should be displayed by the `CPU port` listener, since the sent packet has the following default attributes: destination IP `10.0.0.1` and destination MAC `00:00:00:00:00:01` and the destination IP is saved in the `copy_to_cpu` table inside the [commands](commands.txt).
+Every time you send a packet, it should be displayed by the `CPU port` listener, since the sent packet has the source IP of `10.0.1.0` which is saved in the `copy_to_cpu` table inside the [commands](commands.txt).
 
 If you want you can write the source IP addresses of the sniffed packets to a `log file`. To do this edit the [receive.py](receive.py) file. See the lines between 30-34.
 
@@ -55,6 +55,6 @@ Notice that if you pass `veth2` or `veth8` to the `CPU port listener` you will b
 - `sudo python receive.py veth4` - starts the host2(MAC:00:00:00:00:00:02 IP:10.0.0.2) listener on `port 2(veth4)`
 - `sudo python send_many.py` - sends 4 packets on `port 4(veth8)`;
 
-Observe the hexdump output of the listeners and [send_many.py](send_many.py) code to see the source/destination mac/ip addresses for these 4 packets in more detail. Packets P1 and P3 must be mirrored to the CPU port since these packets' source ip addresses are in the `copy_to_cpu` table.
+Observe the hexdump output of the listeners and [send_many.py](send_many.py) code to see the source/destination mac and ip addresses for these 4 packets in more detail. Packets P1 and P3 must be mirrored to the CPU port since these packets' source ip addresses are in the `copy_to_cpu` table.
 
 Feel free to send me a mail(see my profile), if you did not understand something. Thats all. :)
