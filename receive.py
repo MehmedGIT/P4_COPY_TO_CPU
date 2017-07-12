@@ -5,15 +5,14 @@ import sys
 
 # Destination IP Counter
 counter = 0
-logFileName = "cpu.log"
 
-if(os.path.isfile(logFileName)):
-	os.remove(logFileName)
+if(os.path.isfile("cpu.log")):
+	os.remove("cpu.log")
 
 def getSrcIP(packet):
 	global counter
 	counter += 1
-	fileLog = open(logFileName, "a")
+	fileLog = open("cpu.log", "a")
 	fileLog.write('[{}]: SrcAddr: {}\n'.format(counter, packet[0][1].src))
 	return hexdump(packet)
 
